@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Soundboard Buddy</string>
+    <string name="picture_of_button">picture of button</string>
+    <string name="picture_of_delete_x">picture of delete x</string>
+    <string name="soundname_placeholder">soundName placeholder</string>
+    <string name="play">Play</string>
+    <string name="floating_action_button">Floating Action Button</string>
+    <string name="new_sound">New Sound!</string>
+    <string name="sound_name">Sound name</string>
+    <string name="upload_audio">Upload</string>
+    <string name="record_audio">Record</string>
+    <string name="rerecord_audio">Re-Record</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="volume_bar_text">Current volume: %1$s/%2$s</string>
+    <string name="your_saved_sounds">Your saved sounds:</string>
+    <string name="select_a_button_color">Select a button color:</string>
+    <string name="red">Red</string>
+    <string name="blue">Blue</string>
+    <string name="white">White</string>
+    <string name="black">Black</string>
+
+</resources>
