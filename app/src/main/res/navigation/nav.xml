@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav"
+    app:startDestination="@id/soundboardFragment">
+
+    <fragment
+        android:id="@+id/soundboardFragment"
+        android:name="com.perozzi_package.soundboardbuddy.ui.soundboard.SoundboardFragment"
+        android:label="SoundboardFragment" >
+        <action
+            android:id="@+id/action_soundboardFragment_to_addItemDialogFragment"
+            app:destination="@id/addItemDialogFragment"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right" />
+    </fragment>
+    <dialog
+        android:id="@+id/addItemDialogFragment"
+        android:name="com.perozzi_package.soundboardbuddy.ui.soundboard.AddItemDialogFragment"
+        android:label="AddItemDialogFragment" >
+        <action
+            android:id="@+id/action_addItemDialogFragment_to_soundboardFragment"
+            app:destination="@id/soundboardFragment" />
+    </dialog>
+</navigation>

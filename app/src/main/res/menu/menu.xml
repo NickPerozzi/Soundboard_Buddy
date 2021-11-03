@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/ic_all_sounds"
+        android:title="All"
+        android:icon="@drawable/all_sounds_icon"
+        />
+    <item
+        android:id="@+id/ic_recorded_sounds"
+        android:title="Recorded"
+        android:icon="@drawable/recorded_sounds_icon"
+        />
+    <item
+        android:id="@+id/ic_uploaded_sounds"
+        android:title="Uploaded"
+        android:icon="@drawable/uploaded_sounds_icon"
+        />
+    <item
+        android:id="@+id/ic_default_sounds"
+        android:title="Default"
+        android:icon="@drawable/starting_sounds_icon"
+        />
+    <item
+        android:id="@+id/ic_info_page"
+        android:title="About"
+        android:icon="@drawable/info_page_icon"
+        />
+</menu>

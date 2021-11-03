@@ -6,8 +6,8 @@
 
     <data>
         <variable
-            name="addSoundItemDialogViewModel"
-            type="com.perozzi_package.soundboardbuddy.ui.soundboard.AddSoundItemDialogViewModel" />
+            name="addItemDialogViewModel"
+            type="com.perozzi_package.soundboardbuddy.ui.soundboard.AddItemDialogViewModel" />
     </data>
 
     <LinearLayout
@@ -21,7 +21,7 @@
         <TextView
             android:id="@+id/newSoundTitle"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/new_sound"
             android:textSize="30sp"
@@ -90,7 +90,7 @@
                 android:gravity="center"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:visibility="@{addSoundItemDialogViewModel.uploadButtonVisibility}"
+                android:visibility="@{addItemDialogViewModel.uploadButtonVisibility}"
                 />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/record_audio"
-                android:visibility="@{addSoundItemDialogViewModel.recordButtonVisibility}"
+                android:visibility="@{addItemDialogViewModel.recordButtonVisibility}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/uploadAudioButton"
                 app:layout_constraintTop_toTopOf="parent"
@@ -114,64 +114,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/recordAudioButton"
                 app:layout_constraintTop_toTopOf="parent"
-                android:visibility="@{addSoundItemDialogViewModel.recordButtonVisibility}"
+                android:visibility="@{addItemDialogViewModel.recordButtonVisibility}"
                 />
 
         </LinearLayout>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:text="@string/select_a_button_color" />
-
-        <RadioGroup
-            android:id="@+id/colorSelectRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextSoundName">
-
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/redRadio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/diy_button_unpressed_red"
-                android:padding="3dp"
-                android:text="@string/red"
-                />
-
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/blueRadio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="3dp"
-                android:text="@string/blue"
-                />
-
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/whiteRadio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="3dp"
-                android:text="@string/white"
-                />
-
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:id="@+id/blackRadio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="3dp"
-                android:text="@string/black"
-                />
-
-        </RadioGroup>
 
         <LinearLayout
             android:id="@+id/confirmOrCancelButtonGroup"

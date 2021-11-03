@@ -1,14 +1,11 @@
 package com.perozzi_package.soundboardbuddy.ui.soundboard
 
-import android.app.Application
-import android.content.res.Resources
-import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 
-class AddSoundItemDialogViewModel() : ViewModel() {
+class AddItemDialogViewModel() : ViewModel() {
 
     var recordSelectedNotUpload: MutableLiveData<Boolean> = MutableLiveData(false)
 

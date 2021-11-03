@@ -5,7 +5,7 @@
     <data>
         <variable
             name="addSoundItemDialogViewModel"
-            type="com.perozzi_package.soundboardbuddy.ui.soundboard.AddSoundItemDialogViewModel" />
+            type="com.perozzi_package.soundboardbuddy.ui.soundboard.AddItemDialogViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

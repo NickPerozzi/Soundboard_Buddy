@@ -1,6 +1,5 @@
 package com.perozzi_package.soundboardbuddy.other
 
-import android.graphics.drawable.Drawable
 import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.perozzi_package.soundboardbuddy.R
+import soundboardbuddy.R
 import com.perozzi_package.soundboardbuddy.ui.soundboard.SoundViewModel
 import com.perozzi_package.soundboardbuddy.data.db.entities.SoundGridItem
 import kotlinx.android.synthetic.main.sound_item.view.*

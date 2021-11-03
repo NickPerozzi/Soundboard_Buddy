@@ -1,28 +1,35 @@
 package com.perozzi_package.soundboardbuddy.ui.soundboard
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.media.AudioManager
 import android.media.MediaPlayer
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.SeekBar
-import androidx.core.app.ActivityCompat
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.perozzi_package.soundboardbuddy.R
 import com.perozzi_package.soundboardbuddy.data.db.SoundDatabase
 import com.perozzi_package.soundboardbuddy.data.db.entities.SoundGridItem
 import com.perozzi_package.soundboardbuddy.data.repositories.SoundRepository
-import com.perozzi_package.soundboardbuddy.databinding.ActivityMainBinding
-import com.perozzi_package.soundboardbuddy.databinding.DialogAddSoundBinding
 import com.perozzi_package.soundboardbuddy.other.SoundItemAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_soundboard.*
+import soundboardbuddy.R
+import soundboardbuddy.databinding.FragmentSoundboardBinding
 
-class SoundboardActivity : AppCompatActivity() { // KodeinAware {
+class SoundboardFragment : Fragment() {
+
+    private lateinit var navController: NavController
+    private lateinit var binding: FragmentSoundboardBinding
+    private lateinit var soundboardViewModel: SoundboardViewModel
 
     // These two lines should replace the three lines in onCreate, but error is thrown:
     // android.app.Application cannot be cast to org.kodein.di.KodeinAware
@@ -33,20 +40,31 @@ class SoundboardActivity : AppCompatActivity() { // KodeinAware {
     lateinit var audioManager: AudioManager
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val soundboardActivityViewModel = SoundboardActivityViewModel()
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
 
-        audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
+        binding = FragmentSoundboardBinding.inflate(layoutInflater)
+        binding.lifecycleOwner = this
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+
+
+        soundboardViewModel = SoundboardViewModel()
+        binding.soundboardViewModel = soundboardViewModel
+
+        audioManager = (requireActivity() as AppCompatActivity).getSystemService(AppCompatActivity.AUDIO_SERVICE) as AudioManager
 
         val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
         val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
 
-        val binding = ActivityMainBinding.inflate(layoutInflater)
-        binding.soundboardActivityViewModel = soundboardActivityViewModel
-        setContentView(binding.root)
         val volumeAdjustmentBar = binding.volumeAdjustmentBar
         val volumeAdjustmentText = binding.volumeAdjustmentText
         volumeAdjustmentBar.max = /*soundboardActivityViewModel.*/maxVolume
@@ -74,7 +92,7 @@ class SoundboardActivity : AppCompatActivity() { // KodeinAware {
         // these need to be moved, but something went wrong when trying to implement
         // dependency injection so these are just here for now
         // https://www.youtube.com/watch?v=8Pl1EVgenkg
-        val database = SoundDatabase(this)
+        val database = context?.let { SoundDatabase(it) } as SoundDatabase
         val repository = SoundRepository(database)
         val factory = SoundViewModelFactory(repository)
 
@@ -83,22 +101,30 @@ class SoundboardActivity : AppCompatActivity() { // KodeinAware {
         val adapter = SoundItemAdapter(listOf(), listOf(), /*listOf(), */viewModel)
 
         soundboardRecyclerView.layoutManager =
-            GridLayoutManager(this, 3, LinearLayoutManager.VERTICAL, false)
+            GridLayoutManager(context, 3, LinearLayoutManager.VERTICAL, false)
         soundboardRecyclerView.adapter = adapter
 
-        viewModel.getAllSoundItems().observe(this, Observer {
+        viewModel.getAllSoundItems().observe(viewLifecycleOwner, {
             adapter.items = it
-            adapter.sounds = listOf(MediaPlayer.create(this, R.raw.taco_bell)) // TODO()
+            adapter.sounds = listOf(MediaPlayer.create(context, R.raw.taco_bell)) // TODO()
             //adapter.colors = listOf(6)
             adapter.notifyDataSetChanged()
         })
 
+        floatingAddButton.setOnClickListener{
+            navController.navigate(R.id.action_soundboardFragment_to_addItemDialogFragment)
+        }
+
+        val fragmentManager = (requireActivity() as AppCompatActivity).supportFragmentManager
+
         floatingAddButton.setOnClickListener {
-            AddSoundItemDialog(this, object : AddDialogListener {
-                override fun onAddButtonClicked(item: SoundGridItem) {
-                    viewModel.upsert(item)
-                }
-            }).show()
+            context?.let { context ->
+                AddItemDialogFragment(context, object : AddDialogListener {
+                    override fun onAddButtonClicked(item: SoundGridItem) {
+                        viewModel.upsert(item)
+                    }
+                }).show(fragmentManager,"My fragment")
+            }
         }
     }
 }
