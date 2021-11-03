@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="addItemDialogViewModel"
             type="com.perozzi_package.soundboardbuddy.ui.soundboard.AddItemDialogViewModel" />
@@ -15,17 +16,17 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:padding="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/newSoundTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:paddingTop="-10dp"
             android:text="@string/new_sound"
             android:textSize="30sp"
-            android:paddingTop="-10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,14 +35,14 @@
             android:id="@+id/editTextSoundName"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
+            android:autofillHints="Taco Bell bong"
             android:ems="10"
             android:hint="@string/sound_name"
             android:inputType="textCapSentences"
             android:paddingTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/newSoundTitle"
-            android:autofillHints="Taco Bell bong" />
+            app:layout_constraintTop_toBottomOf="@id/newSoundTitle" />
 
         <RadioGroup
             android:id="@+id/uploadRecordRadioGroup"
@@ -58,16 +59,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="10dp"
-                android:text="@string/upload_audio"
-                />
+                android:text="@string/upload_audio" />
 
             <androidx.appcompat.widget.AppCompatRadioButton
                 android:id="@+id/recordRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="@string/record_audio"
-                />
+                android:text="@string/record" />
 
         </RadioGroup>
 
@@ -76,46 +75,94 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/uploadRecordRadioGroup"
             tools:ignore="InvalidId">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/uploadAudioButton"
+            <LinearLayout
+                android:id="@+id/topButtonGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/upload_audio"
                 android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:visibility="@{addItemDialogViewModel.uploadButtonVisibility}"
-                />
+                app:layout_constraintTop_toBottomOf="parent"
+                tools:ignore="InvalidId">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/recordAudioButton"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/uploadAudioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/upload_audio"
+                    android:visibility="@{addItemDialogViewModel.uploadButtonVisibility}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/startRecordAudioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/record_audio_start"
+                    android:textColor="#FF0000"
+                    android:textStyle="bold"
+                    android:visibility="@{addItemDialogViewModel.recordButtonVisibility}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/uploadAudioButton"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/stopRecordAudioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/record_audio_stop"
+                    android:visibility="@{addItemDialogViewModel.recordButtonVisibility}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/startRecordAudioButton"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bottomButtonGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/record_audio"
-                android:visibility="@{addItemDialogViewModel.recordButtonVisibility}"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/uploadAudioButton"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="SpeakableTextPresentCheck" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                tools:ignore="InvalidId">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/rerecordAudioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/rerecord_audio"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/recordAudioButton"
-                app:layout_constraintTop_toTopOf="parent"
-                android:visibility="@{addItemDialogViewModel.recordButtonVisibility}"
-                />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/previewRecordAudioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/preview"
+                    android:visibility="@{addItemDialogViewModel.recordButtonVisibility}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/stopRecordAudioButton"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/resetRecordAudioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/reset"
+                    android:visibility="@{addItemDialogViewModel.recordButtonVisibility}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/previewRecordAudioButton"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
