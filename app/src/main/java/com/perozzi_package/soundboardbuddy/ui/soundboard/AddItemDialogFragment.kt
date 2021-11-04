@@ -1,7 +1,9 @@
 package com.perozzi_package.soundboardbuddy.ui.soundboard
 
 import android.Manifest
+import android.app.Activity.RESULT_OK
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import android.media.MediaRecorder
@@ -29,6 +31,8 @@ class AddItemDialogFragment(context: Context, private var addDialogListener: Add
     private lateinit var binding: FragmentAddItemDialogBinding
     private lateinit var addItemDialogViewModel: AddItemDialogViewModel
     private lateinit var mediaRecorder: MediaRecorder
+
+    private lateinit var audioUri: Uri
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -95,9 +99,7 @@ class AddItemDialogFragment(context: Context, private var addDialogListener: Add
         }
 
         uploadAudioButton.setOnClickListener {
-/*
             startFileChooser()
-*/
         }
 
         // val recordingPath = context?.getExternalFilesDir(null)?.absolutePath + "latest_recording.mp3"
@@ -178,20 +180,18 @@ class AddItemDialogFragment(context: Context, private var addDialogListener: Add
             startRecordAudioButton.isEnabled = true
     }
 
-}
-
-
-/*private fun startFileChooser() {
-    val intent = Intent()
-    intent.setType("audio/*")
-    intent.setAction(Intent.ACTION_GET_CONTENT)
-    startActivityForResult(this, Intent.createChooser(intent, "Select audio"), 111, null)
-}*/
-
-/*override fun OnActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    super.onActivityResult(requestCode, resultCode, data)
-    if (requestCode == 111 && resultCode == Activity.RESULT_OK && data != null) {
-
+    private fun startFileChooser() {
+        val intent = Intent()
+        intent.type = "audio/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(intent, 100)
     }
 
-}*/
+    fun OnActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 100 && resultCode == RESULT_OK) {
+            audioUri = data?.data!!
+        }
+
+    }
+}
