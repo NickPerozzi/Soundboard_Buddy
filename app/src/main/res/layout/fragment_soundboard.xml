@@ -25,15 +25,14 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/appLogo"
+                android:id="@+id/app_logo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/soundboard_buddy_app_logo"
                 android:padding="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/soundboard_buddy_title"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/text_logo_take_1" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -8,7 +8,8 @@
     <string name="new_sound">New Sound!</string>
     <string name="sound_name">Sound name</string>
     <string name="upload_audio">Upload</string>
-    <string name="record_audio">Record</string>
+    <string name="record_audio_start">Start</string>
+    <string name="record_audio_stop">Stop</string>
     <string name="rerecord_audio">Re-Record</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
@@ -20,5 +21,9 @@
     <string name="white">White</string>
     <string name="black">Black</string>
     <string name="soundboard_buddy_app_logo">Soundboard Buddy app logo</string>
+    <string name="record_retry">Retry</string>
+    <string name="preview">Preview</string>
+    <string name="record">Record</string>
+    <string name="reset">Reset</string>
 
 </resources>
