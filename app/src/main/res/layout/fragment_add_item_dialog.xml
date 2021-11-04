@@ -48,7 +48,7 @@
             android:id="@+id/uploadRecordRadioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/editTextSoundName">
@@ -65,8 +65,17 @@
                 android:id="@+id/recordRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:padding="10dp"
                 android:text="@string/record" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/presetRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:text="@string/preset" />
 
         </RadioGroup>
 

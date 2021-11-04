@@ -9,7 +9,6 @@ import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +21,6 @@ import com.perozzi_package.soundboardbuddy.data.db.entities.SoundGridItem
 import kotlinx.android.synthetic.main.fragment_add_item_dialog.*
 import soundboardbuddy.R
 import soundboardbuddy.databinding.FragmentAddItemDialogBinding
-import java.io.File
 
 class AddItemDialogFragment(context: Context, private var addDialogListener: AddDialogListener) :
     AppCompatDialogFragment() {
@@ -69,29 +67,29 @@ class AddItemDialogFragment(context: Context, private var addDialogListener: Add
             startRecordAudioButton.isEnabled = true
         }
 
-        // val uploadRadioButton = binding.uploadRadioButton
-        // val recordRadioButton = binding.recordRadioButton
-        uploadRadioButton.isSelected = true
+        uploadRadioButton.isSelected = false
         recordRadioButton.isSelected = false
-        // val recordButton = binding.recordAudioButton
-        // val rerecordButton = binding.rerecordAudioButton
+        presetRadioButton.isSelected = false
 
         uploadRecordRadioGroup.setOnCheckedChangeListener { _, id ->
             when (id) {
                 R.id.uploadRadioButton -> {
-                    addItemDialogViewModel.recordSelectedNotUpload.value = false
-                    addItemDialogViewModel.recordSelectedNotUpload.postValue(false)
+                    addItemDialogViewModel.uploadSelected.value = true
+                    addItemDialogViewModel.recordSelected.value = false
+                    addItemDialogViewModel.presetSelected.value = false
                     Toast.makeText(context, "Upload time", Toast.LENGTH_SHORT).show()
-                    uploadAudioButton.visibility = View.VISIBLE
-                    startRecordAudioButton.visibility = View.GONE
-                    stopRecordAudioButton.visibility = View.GONE
                 }
                 R.id.recordRadioButton -> {
-                    addItemDialogViewModel.recordSelectedNotUpload.value = true
+                    addItemDialogViewModel.uploadSelected.value = false
+                    addItemDialogViewModel.recordSelected.value = true
+                    addItemDialogViewModel.presetSelected.value = false
                     Toast.makeText(context, "Recording time", Toast.LENGTH_SHORT).show()
-                    uploadAudioButton.visibility = View.GONE
-                    startRecordAudioButton.visibility = View.VISIBLE
-                    stopRecordAudioButton.visibility = View.VISIBLE
+                }
+                R.id.presetRadioButton -> {
+                    addItemDialogViewModel.uploadSelected.value = false
+                    addItemDialogViewModel.recordSelected.value = false
+                    addItemDialogViewModel.presetSelected.value = true
+                    Toast.makeText(context, "Preset time", Toast.LENGTH_SHORT).show()
                 }
                 else -> {
                 }

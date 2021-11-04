@@ -25,5 +25,6 @@
     <string name="preview">Preview</string>
     <string name="record">Record</string>
     <string name="reset">Reset</string>
+    <string name="preset">Preset</string>
 
 </resources>
