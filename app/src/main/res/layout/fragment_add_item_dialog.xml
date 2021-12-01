@@ -48,7 +48,7 @@
             android:id="@+id/uploadRecordRadioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/editTextSoundName">
@@ -57,27 +57,53 @@
                 android:id="@+id/uploadRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:padding="10dp"
+                android:layout_weight="1"
                 android:text="@string/upload_audio" />
 
             <androidx.appcompat.widget.AppCompatRadioButton
                 android:id="@+id/recordRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:padding="10dp"
+                android:layout_weight="1"
                 android:text="@string/record" />
 
             <androidx.appcompat.widget.AppCompatRadioButton
                 android:id="@+id/presetRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:padding="10dp"
+                android:layout_weight="1"
                 android:text="@string/preset" />
 
         </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:id="@+id/insertAudioPrompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                android:text="@{addItemDialogViewModel.audioPromptText}"
+                android:visibility="@{addItemDialogViewModel.promptVisibility}"
+                />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/presetSoundsSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:spinnerMode="dropdown"
+            android:entries="@{addItemDialogViewModel.presetSpinnerOptions}"
+            android:visibility="@{addItemDialogViewModel.presetSpinnerVisibility}"
+            />
 
         <LinearLayout
             android:id="@+id/buttonGroup"
@@ -123,6 +149,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/uploadAudioButton"
                     app:layout_constraintTop_toTopOf="parent"
+                    android:enabled="true"
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -131,6 +158,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/record_audio_stop"
+                    android:enabled="false"
                     android:visibility="@{addItemDialogViewModel.recordButtonVisibility}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/startRecordAudioButton"
@@ -155,6 +183,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/preview"
+                    android:enabled="false"
                     android:visibility="@{addItemDialogViewModel.recordButtonVisibility}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/stopRecordAudioButton"
@@ -173,7 +202,39 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/presetPreviewLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                tools:ignore="InvalidId">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/presetPreviewButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/preview"
+                    android:visibility="@{addItemDialogViewModel.presetSpinnerVisibility}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/stopRecordAudioButton"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
         </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/uploadedFileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{addItemDialogViewModel.uploadedFileName}"
+            android:visibility="@{addItemDialogViewModel.uploadButtonVisibility}"
+            />
 
         <LinearLayout
             android:id="@+id/confirmOrCancelButtonGroup"
@@ -201,6 +262,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/confirm"
+                android:enabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

@@ -1,6 +1,8 @@
 package com.perozzi_package.soundboardbuddy.ui.soundboard
 
 import android.annotation.SuppressLint
+import android.content.Context.MODE_PRIVATE
+import android.graphics.Bitmap
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -10,20 +12,20 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.perozzi_package.soundboardbuddy.data.db.SoundDatabase
-import com.perozzi_package.soundboardbuddy.data.db.entities.SoundGridItem
+import com.perozzi_package.soundboardbuddy.data.db.entities.SoundboardItem
 import com.perozzi_package.soundboardbuddy.data.repositories.SoundRepository
-import com.perozzi_package.soundboardbuddy.other.SoundItemAdapter
+import com.perozzi_package.soundboardbuddy.other.SoundboardAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_soundboard.*
 import soundboardbuddy.R
 import soundboardbuddy.databinding.FragmentSoundboardBinding
+import java.io.IOException
 
 class SoundboardFragment : Fragment() {
 
@@ -98,17 +100,25 @@ class SoundboardFragment : Fragment() {
 
         val viewModel = ViewModelProvider(this, factory).get(SoundViewModel::class.java)
 
-        val adapter = SoundItemAdapter(listOf(), listOf(), /*listOf(), */viewModel)
-
+        val listAdapter = SoundboardAdapter()
+        soundboardRecyclerView.adapter = listAdapter
         soundboardRecyclerView.layoutManager =
             GridLayoutManager(context, 3, LinearLayoutManager.VERTICAL, false)
-        soundboardRecyclerView.adapter = adapter
 
-        viewModel.getAllSoundItems().observe(viewLifecycleOwner, {
-            adapter.items = it
-            adapter.sounds = listOf(MediaPlayer.create(context, R.raw.taco_bell)) // TODO()
-            //adapter.colors = listOf(6)
-            adapter.notifyDataSetChanged()
+/*
+        soundboardViewModel.arrayForSoundboard.observe(viewLifecycleOwner, {data ->
+            listAdapter.submitList(data)
+        })
+*/
+
+        viewModel.getAllSoundItems().observe(viewLifecycleOwner, { listOfSoundboardItems ->
+            var x = R.raw.taco_bell
+/*
+            listAdapter.currentList = listOfSoundboardItems
+            listAdapter.sounds = listOf(MediaPlayer.create(context, R.raw.taco_bell)) // TODO()
+            listAdapter.colors =
+            listAdapter.notifyDataSetChanged()
+*/
         })
 
         floatingAddButton.setOnClickListener{
@@ -120,11 +130,24 @@ class SoundboardFragment : Fragment() {
         floatingAddButton.setOnClickListener {
             context?.let { context ->
                 AddItemDialogFragment(context, object : AddDialogListener {
-                    override fun onAddButtonClicked(item: SoundGridItem) {
+                    override fun onAddButtonClicked(item: SoundboardItem) {
                         viewModel.upsert(item)
                     }
                 }).show(fragmentManager,"My fragment")
             }
         }
+
+/*
+        private fun saveAudioToInternalStorage(filename: String, mediaPlayer: MediaPlayer): Boolean {
+            return try {
+                requireActivity().openFileOutput("$filename", MODE_PRIVATE).use { stream ->
+                    if(!mediaPlayer.)
+                }
+            } catch(e: IOException) {
+                e.printStackTrace()
+                false
+            }
+        }
+*/
     }
 }

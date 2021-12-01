@@ -2,7 +2,7 @@ package com.perozzi_package.soundboardbuddy.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.perozzi_package.soundboardbuddy.data.db.entities.SoundGridItem
+import com.perozzi_package.soundboardbuddy.data.db.entities.SoundboardItem
 
 @Dao
 interface SoundDao {
@@ -11,11 +11,11 @@ interface SoundDao {
     // dao equivalent for api's is called a service layer
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(item: SoundGridItem) // insert, if it exists already it will update it
+    suspend fun upsert(item: SoundboardItem) // insert, if it exists already it will update it
 
     @Delete
-    suspend fun delete(item: SoundGridItem)
+    suspend fun delete(item: SoundboardItem)
 
     @Query("SELECT * FROM soundboard")
-    fun getAllSoundItems(): LiveData<List<SoundGridItem>>
+    fun getAllSoundItems(): LiveData<List<SoundboardItem>>
 }

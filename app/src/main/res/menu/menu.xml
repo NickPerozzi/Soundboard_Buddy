@@ -17,7 +17,7 @@
         />
     <item
         android:id="@+id/ic_default_sounds"
-        android:title="Default"
+        android:title="Preset"
         android:icon="@drawable/starting_sounds_icon"
         />
     <item

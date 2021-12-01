@@ -2,7 +2,7 @@
     <string name="app_name">Soundboard Buddy</string>
     <string name="picture_of_button">picture of button</string>
     <string name="picture_of_delete_x">picture of delete x</string>
-    <string name="soundname_placeholder">soundName placeholder</string>
+    <string name="sound_name_placeholder">soundName placeholder</string>
     <string name="play">Play</string>
     <string name="floating_action_button">Floating Action Button</string>
     <string name="new_sound">New Sound!</string>

@@ -4,10 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.perozzi_package.soundboardbuddy.data.db.entities.SoundGridItem
+import androidx.room.TypeConverter
+import com.perozzi_package.soundboardbuddy.data.db.entities.SoundboardItem
 
 @Database(
-    entities = (arrayOf(SoundGridItem::class)),
+    entities = (arrayOf(SoundboardItem::class)),
     version = 1
 )
 
@@ -31,3 +32,11 @@ abstract class SoundDatabase: RoomDatabase() {
     }
 
 }
+
+/*
+class Converters {
+    @TypeConverter
+    fun fromMediaPlayerToInt(mp: MediaPlayer?): Int? {
+        return MediaPlayer.to
+    }
+}*/

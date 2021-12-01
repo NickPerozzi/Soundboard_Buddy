@@ -10,7 +10,6 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:padding="10dp">
@@ -22,18 +21,17 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="2"
-            android:text="@string/soundname_placeholder"
+            android:text="@string/sound_name_placeholder"
             android:textAlignment="center"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/delete_button" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/play_button"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:background="@drawable/play_button_blue"
             android:contentDescription="@string/picture_of_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
